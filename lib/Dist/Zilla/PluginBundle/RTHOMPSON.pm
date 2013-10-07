@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::PluginBundle::RTHOMPSON;
 {
-  $Dist::Zilla::PluginBundle::RTHOMPSON::VERSION = '0.132800';
+  $Dist::Zilla::PluginBundle::RTHOMPSON::VERSION = '0.132801';
 }
 # ABSTRACT: (DEPRECATED) RTHOMPSON's Dist::Zilla Configuration
 
@@ -29,7 +29,7 @@ Dist::Zilla::PluginBundle::RTHOMPSON - (DEPRECATED) RTHOMPSON's Dist::Zilla Conf
 
 =head1 VERSION
 
-version 0.132800
+version 0.132801
 
 =head1 SYNOPSIS
 
