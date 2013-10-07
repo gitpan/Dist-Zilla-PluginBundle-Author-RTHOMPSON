@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::PluginBundle::RTHOMPSON;
 {
-  $Dist::Zilla::PluginBundle::RTHOMPSON::VERSION = '0.120160';
+  $Dist::Zilla::PluginBundle::RTHOMPSON::VERSION = '0.132800';
 }
 # ABSTRACT: (DEPRECATED) RTHOMPSON's Dist::Zilla Configuration
 
@@ -19,6 +19,7 @@ before register_component => sub {
 
 1; # Magic true value required at end of module
 
+__END__
 
 =pod
 
@@ -28,7 +29,7 @@ Dist::Zilla::PluginBundle::RTHOMPSON - (DEPRECATED) RTHOMPSON's Dist::Zilla Conf
 
 =head1 VERSION
 
-version 0.120160
+version 0.132800
 
 =head1 SYNOPSIS
 
@@ -73,7 +74,3 @@ SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
 DAMAGES.
 
 =cut
-
-
-__END__
-

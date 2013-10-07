@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::PluginBundle::Author::RTHOMPSON;
 {
-  $Dist::Zilla::PluginBundle::Author::RTHOMPSON::VERSION = '0.120160';
+  $Dist::Zilla::PluginBundle::Author::RTHOMPSON::VERSION = '0.132800';
 }
 # ABSTRACT: RTHOMPSON's Dist::Zilla Configuration
 
@@ -84,24 +84,24 @@ sub configure {
 
     # Decide whether to test SYNOPSIS for syntax.
     if (_parse_bool($args{synopsis_is_perl_code})) {
-        $self->add_plugins('SynopsisTests');
+        $self->add_plugins('Test::Synopsis');
     }
 
     # Choose release plugin
-    given ($args{release}) {
-        when (lc eq 'real') {
+    for ($args{release}) {
+        if (lc eq 'real') {
             $self->add_plugins('UploadToCPAN')
         }
-        when (lc eq 'fake') {
+        elsif (lc eq 'fake') {
             $self->add_plugins('FakeRelease')
         }
-        when (lc eq 'none') {
+        elsif (lc eq 'none') {
             # No release plugin
         }
-        when ($_) {
+        elsif ($_) {
             $self->add_plugins("$_")
         }
-        default {
+        else {
             # Empty string is the same as 'none'
         }
     }
@@ -175,11 +175,11 @@ sub configure {
 
     # Choose version control. This must be after 'NextRelease' so that
     # the Changes file is updated before committing.
-    given (lc $args{vcs}) {
-        when ('none') {
+    for (lc $args{vcs}) {
+        if ('none') {
             # No-op
         }
-        when ('git') {
+        elsif ('git') {
             $self->add_plugins(
                 ['Git::Check' => {
                     allow_dirty => [ 'dist.ini', 'README.pod', 'Changes' ],
@@ -216,7 +216,7 @@ sub configure {
             if ($args{push_to}) {
             }
         }
-        default {
+        else {
             croak "Unknown vcs: $_\nTry setting vcs = 'none' and setting it up yourself.";
         }
     }
@@ -224,6 +224,7 @@ sub configure {
 
 1; # Magic true value required at end of module
 
+__END__
 
 =pod
 
@@ -233,7 +234,7 @@ Dist::Zilla::PluginBundle::Author::RTHOMPSON - RTHOMPSON's Dist::Zilla Configura
 
 =head1 VERSION
 
-version 0.120160
+version 0.132800
 
 =head1 SYNOPSIS
 
@@ -512,7 +513,3 @@ SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
 DAMAGES.
 
 =cut
-
-
-__END__
-
