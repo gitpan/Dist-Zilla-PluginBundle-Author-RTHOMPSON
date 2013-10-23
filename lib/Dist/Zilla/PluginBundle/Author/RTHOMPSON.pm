@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::PluginBundle::Author::RTHOMPSON;
 {
-  $Dist::Zilla::PluginBundle::Author::RTHOMPSON::VERSION = '0.132801';
+  $Dist::Zilla::PluginBundle::Author::RTHOMPSON::VERSION = '0.132960';
 }
 # ABSTRACT: RTHOMPSON's Dist::Zilla Configuration
 
@@ -75,12 +75,14 @@ sub configure {
     }
 
     # Copy files from build dir
-    $self->add_plugins(
-        [ 'CopyFilesFromBuild' => {
-            copy => ($args{copy_file} || [ '' ]),
-            move => ($args{move_file} || [ '' ])
-        } ]
-    );
+    if ($args{copy_file} or $args{move_file}) {
+        $self->add_plugins(
+            [ 'CopyFilesFromBuild' => {
+                copy => ($args{copy_file} || [ '' ]),
+                move => ($args{move_file} || [ '' ])
+            } ]
+        );
+    }
 
     # Decide whether to test SYNOPSIS for syntax.
     if (_parse_bool($args{synopsis_is_perl_code})) {
@@ -175,17 +177,17 @@ sub configure {
 
     # Choose version control. This must be after 'NextRelease' so that
     # the Changes file is updated before committing.
-    for (lc $args{vcs}) {
-        if ('none') {
+    for ($args{vcs}) {
+        if (lc eq 'none') {
             # No-op
         }
-        elsif ('git') {
+        elsif (lc eq 'git') {
             $self->add_plugins(
                 ['Git::Check' => {
-                    allow_dirty => [ 'dist.ini', 'README.pod', 'Changes' ],
+                    allow_dirty => $args{allow_dirty},
                 } ],
                 [ 'Git::Commit' => {
-                    allow_dirty => [ 'dist.ini', 'README.pod', 'Changes' ],
+                    allow_dirty => $args{allow_dirty},
                 } ],
                 'Git::Tag',
                 # This can't hurt. It's a no-op if github is not involved.
@@ -234,7 +236,7 @@ Dist::Zilla::PluginBundle::Author::RTHOMPSON - RTHOMPSON's Dist::Zilla Configura
 
 =head1 VERSION
 
-version 0.132801
+version 0.132960
 
 =head1 SYNOPSIS
 
