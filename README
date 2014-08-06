@@ -1,16 +1,20 @@
 NAME
+
     Dist::Zilla::PluginBundle::Author::RTHOMPSON - RTHOMPSON's Dist::Zilla
     Configuration
 
 VERSION
-    version 0.133030
+
+    version 0.142180
 
 SYNOPSIS
+
     In dist.ini:
 
         [@Author::RTHOMPSON]
 
 DESCRIPTION
+
     This plugin bundle, in its default configuration, is equivalent to:
 
         [AutoVersion]
@@ -74,7 +78,9 @@ DESCRIPTION
     though.
 
 OPTIONS
-  -remove
+
+ -remove
+
     This option can be used to remove specific plugins from the bundle. It
     can be used multiple times.
 
@@ -86,11 +92,12 @@ OPTIONS
         -remove = Test::Perl::Critic
         -remove = GithubMeta
 
-  version, version_major
-    This option is used to specify the version of the module. The default is
-    'auto', which uses the AutoVersion plugin to choose a version number.
-    You can also set the version number manually, or choose 'disable' to
-    prevent this bundle from supplying a version.
+ version, version_major
+
+    This option is used to specify the version of the module. The default
+    is 'auto', which uses the AutoVersion plugin to choose a version
+    number. You can also set the version number manually, or choose
+    'disable' to prevent this bundle from supplying a version.
 
     Examples:
 
@@ -102,7 +109,8 @@ OPTIONS
         ; Provide no version, so that another plugin can handle it.
         version = disable
 
-  copy_file, move_file
+ copy_file, move_file
+
     If you want to copy or move files out of the build dir and into the
     distribution dir, use these two options to specify those files. Both of
     these options can be specified multiple times.
@@ -114,12 +122,10 @@ OPTIONS
     README file out of its build directory in order for Github to see it.
 
     If you want to include an auto-generated file in your distribution but
-    you *don't* want to include it in the build, use "move_file" instead of
-    "copy_file".
+    you don't want to include it in the build, use move_file instead of
+    copy_file.
 
-    The default is to move README.pod out of the build dir. If you use
-    "move_file" in your configuration, this default will be disabled, so if
-    you want it, make sure to include it along with your other "move_file"s.
+    By default, both of these options are unset.
 
     Example:
 
@@ -127,25 +133,28 @@ OPTIONS
         move_file = README.pod
         copy_file = README.txt
 
-  synopsis_is_perl_code
-    If this is set to true (the default), then the SynopsisTests plugin will
-    be enabled. This plugin checks the perl syntax of the SYNOPSIS sections
-    of your modules. Obviously, if your SYNOPSIS section is not perl code
-    (case in point: this module), you should set this to false.
+ synopsis_is_perl_code
+
+    If this is set to true (the default), then the SynopsisTests plugin
+    will be enabled. This plugin checks the perl syntax of the SYNOPSIS
+    sections of your modules. Obviously, if your SYNOPSIS section is not
+    perl code (case in point: this module), you should set this to false.
 
     Example:
 
         synopsis_is_perl_code = false
 
-  release
+ release
+
     This option chooses the type of release to do. The default is 'real,'
     which means "really upload the release to CPAN" (i.e. load the
-    "UploadToCPAN" plugin). You can set it to 'fake,' in which case the
-    "FakeRelease" plugin will be loaded, which simulates the release process
-    without actually doing anything. You can also set it to 'none' if you do
-    not want this module to load any release plugin, in which case your
-    dist.ini file should load a release plugin directly. Any other value for
-    this option will be interpreted as a release plugin name to be loaded.
+    UploadToCPAN plugin). You can set it to 'fake,' in which case the
+    FakeRelease plugin will be loaded, which simulates the release process
+    without actually doing anything. You can also set it to 'none' if you
+    do not want this module to load any release plugin, in which case your
+    dist.ini file should load a release plugin directly. Any other value
+    for this option will be interpreted as a release plugin name to be
+    loaded.
 
     Examples:
 
@@ -158,11 +167,12 @@ OPTIONS
         ; Or you can specify a specific release plugin.
         release = OtherReleasePlugin
 
-  archive, archive_directory
-    If set to true, the "archive" option copies each released version of the
-    module to an archive directory, using the "ArchiveRelease" plugin. This
+ archive, archive_directory
+
+    If set to true, the archive option copies each released version of the
+    module to an archive directory, using the ArchiveRelease plugin. This
     is the default. The name of the archive directory is specified using
-    "archive_directory", which is releases by default.
+    archive_directory, which is releases by default.
 
     Examples:
 
@@ -172,75 +182,86 @@ OPTIONS
         ; Or don't archive
         archive = false
 
-  vcs
-    This option specifies which version control system is being used for the
-    distribution. Integration for that version control system is enabled.
-    The default is 'git', and currently the only other option is 'none',
-    which does not load any version control plugins.
+ vcs
 
-  git_remote
+    This option specifies which version control system is being used for
+    the distribution. Integration for that version control system is
+    enabled. The default is 'git', and currently the only other option is
+    'none', which does not load any version control plugins.
+
+ git_remote
+
     This option specifies the primary Git remote for the repository. The
     default is 'origin'. To disable all Git remote operations, set this to
     an empty string.
 
-  git_branch, git_remote_branch
+ git_branch, git_remote_branch
+
     This option specifies the branch that is to be checked against its
-    remote. The default is 'master'. The second option, "git_remote_branch",
+    remote. The default is 'master'. The second option, git_remote_branch,
     is only needed if the remote branch has a different name. It will
-    default to being the same as "git_branch".
+    default to being the same as git_branch.
 
-  no_check_remote
-    By default, the Git branch "git_branch" will be checked against the
-    remote branch "git_remote_branch" at the remote specified by
-    "git_remote" using the "Git::Remote::Check" plugin. If the remote branch
-    is ahead of the local branch, the release process will be aborted. This
-    option disables the check, allowing a release to happen even if the
-    check would fail. This option has no effect if either "git_remote" or
-    "git_branch" is set to an empty string.
+ no_check_remote
 
-  no_push
+    By default, the Git branch git_branch will be checked against the
+    remote branch git_remote_branch at the remote specified by git_remote
+    using the Git::Remote::Check plugin. If the remote branch is ahead of
+    the local branch, the release process will be aborted. This option
+    disables the check, allowing a release to happen even if the check
+    would fail. This option has no effect if either git_remote or
+    git_branch is set to an empty string.
+
+ no_push
+
     By default, the Git repo will be pushed to the remote specified by
-    "git_remote" after every release, to ensure that the remote repository
+    git_remote after every release, to ensure that the remote repository
     contains the latest release. To disable pushing after a release, set
     this option. This option has no effect if git_remote is set to an empty
     string.
 
-  allow_dirty
+ allow_dirty
+
     This corresponds to the option of the same name in the Git::Check and
-    Git::Commit plugins. Briefly, files listed in "allow_dirty" are allowed
+    Git::Commit plugins. Briefly, files listed in allow_dirty are allowed
     to have changes that are not yet committed to git, and during the
     release process, they will be checked in (committed).
 
     The default is dist.ini, Changes, and README.pod. If you override the
     default, you must include these files manually if you want them.
 
-    This option only has an effect if "vcs" is 'git'.
+    This option only has an effect if vcs is 'git'.
 
 BUGS AND LIMITATIONS
+
     This module should be more configurable. Suggestions welcome.
 
     Please report any bugs or feature requests to
-    "rct+perlbug@thompsonclan.org".
+    rct+perlbug@thompsonclan.org.
 
 INSTALLATION
+
     See perlmodinstall for information and options on installing Perl
     modules.
 
 AUTHOR
+
     Ryan C. Thompson <rct@thompsonclan.org>
 
 COPYRIGHT AND LICENSE
+
     This software is copyright (c) 2010 by Ryan C. Thompson.
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.
 
 DISCLAIMER OF WARRANTY
+
     BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
-    FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN
-    OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
-    PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
-    EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+    FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT
+    WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER
+    PARTIES PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND,
+    EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
     WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE
     ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH
     YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
