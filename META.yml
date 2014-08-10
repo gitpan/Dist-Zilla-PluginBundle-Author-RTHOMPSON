@@ -83,4 +83,4 @@ requires:
 resources:
   homepage: https://github.com/DarwinAwardWinner/Dist-Zilla-PluginBundle-Author-RTHOMPSON
   repository: https://github.com/DarwinAwardWinner/Dist-Zilla-PluginBundle-Author-RTHOMPSON.git
-version: 0.142180
+version: 0.142220

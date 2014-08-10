@@ -5,7 +5,7 @@ use utf8;
 
 package Dist::Zilla::PluginBundle::RTHOMPSON;
 # ABSTRACT: (DEPRECATED) RTHOMPSON's Dist::Zilla Configuration
-$Dist::Zilla::PluginBundle::RTHOMPSON::VERSION = '0.142180';
+$Dist::Zilla::PluginBundle::RTHOMPSON::VERSION = '0.142220';
 use Moose;
 extends "Dist::Zilla::PluginBundle::Author::RTHOMPSON";
 use namespace::autoclean;
@@ -26,7 +26,7 @@ Dist::Zilla::PluginBundle::RTHOMPSON - (DEPRECATED) RTHOMPSON's Dist::Zilla Conf
 
 =head1 VERSION
 
-version 0.142180
+version 0.142220
 
 =head1 SYNOPSIS
 
