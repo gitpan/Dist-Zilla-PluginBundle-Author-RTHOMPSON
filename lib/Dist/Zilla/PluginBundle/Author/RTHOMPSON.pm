@@ -5,12 +5,14 @@ use utf8;
 
 package Dist::Zilla::PluginBundle::Author::RTHOMPSON;
 # ABSTRACT: RTHOMPSON's Dist::Zilla Configuration
-$Dist::Zilla::PluginBundle::Author::RTHOMPSON::VERSION = '0.142220';
+$Dist::Zilla::PluginBundle::Author::RTHOMPSON::VERSION = '0.142221';
 use Moose;
 use Carp;
 with 'Dist::Zilla::Role::PluginBundle::Easy';
+with 'Dist::Zilla::Role::PluginBundle::Config::Slicer';
+with 'Dist::Zilla::Role::PluginBundle::PluginRemover';
 
-sub mvp_multivalue_args { qw( -remove copy_file move_file allow_dirty ) }
+sub mvp_multivalue_args { qw( copy_file move_file allow_dirty ) }
 
 # Returns true for strings of 'true', 'yes', or positive numbers,
 # false otherwise.
@@ -45,12 +47,6 @@ sub configure {
         allow_dirty => [ 'dist.ini', 'README.pod', 'Changes' ],
     };
     my %args = (%$defaults, %{$self->payload});
-
-    # Use the @Filter bundle to handle '-remove'.
-    if ($args{-remove}) {
-        $self->add_bundle('@Filter' => { %args, -bundle => '@Author::RTHOMPSON' });
-        return;
-    }
 
     # Add appropriate version plugin, if any
     if (lc($args{version}) eq 'auto') {
@@ -234,7 +230,7 @@ Dist::Zilla::PluginBundle::Author::RTHOMPSON - RTHOMPSON's Dist::Zilla Configura
 
 =head1 VERSION
 
-version 0.142220
+version 0.142221
 
 =head1 SYNOPSIS
 
@@ -264,6 +260,7 @@ This plugin bundle, in its default configuration, is equivalent to:
     [InstallGuide]
     [ReadmeAnyFromPod / ReadmeTextInBuild ]
     [ReadmeAnyFromPod / ReadmePodInRoot ]
+    phase = release
     [Test::Perl::Critic]
     [PodCoverageTests]
     [PodSyntaxTests]
@@ -461,6 +458,16 @@ override the default, you must include these files manually if you
 want them.
 
 This option only has an effect if C<vcs> is 'git'.
+
+=head2 PLUGIN-SPECIFIC OPTIONS
+
+This bundle consumes the
+C<Dist::Zilla::Role::PluginBundle::Config::Slicer> role, which means
+that you can specify any option to any plugin in the bundle directly
+by prefixing it with the plugin's name. This allows you to configure
+any options not covered by the above. For example, if you want to
+select "scripts" as the directory for the ExecDir plugin, you would
+specify the option as C<ExecDir.dir = "scripts">.
 
 =for Pod::Coverage configure mvp_multivalue_args
 

@@ -72,7 +72,9 @@ requires:
   Dist::Zilla::Plugin::Test::UnusedVars: 0
   Dist::Zilla::Plugin::TestRelease: 0
   Dist::Zilla::Plugin::UploadToCPAN: 0
+  Dist::Zilla::Role::PluginBundle::Config::Slicer: 0
   Dist::Zilla::Role::PluginBundle::Easy: 0
+  Dist::Zilla::Role::PluginBundle::PluginRemover: 0
   Moose: 0
   feature: 0
   namespace::autoclean: 0
@@ -83,4 +85,4 @@ requires:
 resources:
   homepage: https://github.com/DarwinAwardWinner/Dist-Zilla-PluginBundle-Author-RTHOMPSON
   repository: https://github.com/DarwinAwardWinner/Dist-Zilla-PluginBundle-Author-RTHOMPSON.git
-version: 0.142220
+version: 0.142221
